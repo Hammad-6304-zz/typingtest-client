@@ -1,0 +1,17 @@
+.bgContainer{
+    /* width: 100%;
+    border: 1px solid black;
+    padding: 0px; */
+    width: 100%;
+    height: 80vh;
+    background-image: url("/images/hands.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll
+}
+.bgImg{
+    width: 100%;
+    height: auto;
+    visibility: hidden;
+
+}
