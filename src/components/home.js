@@ -1,6 +1,6 @@
 import React from 'react'
 import { ResponsiveContainer } from '../subComponents/responsiveCon'
-import {BlogSegment} from '../subComponents/blogSegment'
+import { BlogSegment } from '../subComponents/blogSegment'
 import Footer from './footer'
 import {
     Button,
@@ -15,7 +15,11 @@ import {
 } from 'semantic-ui-react'
 
 const HomepageLayout = () => (
-    <ResponsiveContainer>
+    <ResponsiveContainer
+    content="Home page"
+    subContent="homepage sub heading"
+    buttonText="start homepage"
+  >
         <Segment style={{ padding: '8em 0em' }} vertical>
             <Grid container stackable verticalAlign='middle'>
                 <Grid.Row>

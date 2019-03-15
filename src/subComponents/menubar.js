@@ -18,7 +18,7 @@ import {
   Sidebar,
   Visibility
 } from "semantic-ui-react";
-class AppBar extends Component {
+class MenuBar extends Component {
   state = {};
 
   hideFixedMenu = () => this.setState({ fixed: false });
@@ -28,41 +28,33 @@ class AppBar extends Component {
     const { fixed } = this.state;
 
     return (
-      <Visibility
-        once={false}
-        onBottomPassed={this.showFixedMenu}
-        onBottomPassedReverse={this.hideFixedMenu}
-      >
-        <Segment
-          inverted
-          textAlign="center"
-          style={{ minHeight: 700, padding: "1em 0em" }}
-          vertical
-        >
-          <Menu
+   
+     
+       
+              <Menu
             fixed={fixed ? "top" : null}
-            inverted={!fixed}
+            inverted={fixed}
             pointing={!fixed}
             secondary={!fixed}
             size="large"
+            
+            
           >
             <Container>
-              <Link to="/">
-                <Menu.Item as="a">Home</Menu.Item>
-              </Link>
+              <Menu.Item as="a">
+                <Link to="/">Home</Link>
+              </Menu.Item>
+              
+              <Menu.Item active as="a">
+                <Link to="/typingtest">Typing Test</Link>
+              </Menu.Item>
+              <Menu.Item as="a">
+                <Link to="/learn">Learn</Link>
+              </Menu.Item>
 
-              <Link to="/typingtest">
-                <Menu.Item active as="a">
-                  Typing Test
-                </Menu.Item>
-              </Link>
-              <Link to="/learn">
-                <Menu.Item as="a">Learn</Menu.Item>
-              </Link>
-
-              <Link to="/HighScore">
-                <Menu.Item as="a">High Scores</Menu.Item>
-              </Link>
+              <Menu.Item as="a">
+                <Link to="/HighScore">High Scores</Link>
+              </Menu.Item>
 
               <Menu.Item position="right">
                 <Button as="a" inverted={!fixed}>
@@ -79,15 +71,9 @@ class AppBar extends Component {
               </Menu.Item>
             </Container>
           </Menu>
-          <HomepageHeading
-            content={this.props.content}
-            subContent={this.props.subContent}
-            buttonText={this.props.buttonText}
-          />
-        </Segment>
-      </Visibility>
+        
     );
   }
 }
 
-export default AppBar;
+export default MenuBar;
