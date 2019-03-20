@@ -1,5 +1,7 @@
 import React from 'react'
 import { ResponsiveContainer } from '../subComponents/responsiveCon'
+import {Route, Link} from "react-router-dom"; 
+
 import { BlogSegment } from '../subComponents/blogSegment'
 import Footer from './footer'
 import {
@@ -14,11 +16,15 @@ import {
     Icon
 } from 'semantic-ui-react'
 
-const TypingTest = () => (
+const TypingTest = (props) => (
     <ResponsiveContainer
     content="Typing test"
     subContent="typing subcontect"
     buttonText="Start typing from"
+    // color=''
+    bgURL = '/images/lightkey.jpg'
+    activetest={true}
+    loggedin={props.loggedin}
   >
         {/* <Segment style={{ padding: '8em 0em' }} vertical>
             <Grid container stackable verticalAlign='middle'>
@@ -51,7 +57,7 @@ const TypingTest = () => (
             <Grid>
                 <Grid.Row textAlign='center'>
                     <Grid.Column >
-                        <Container centered>
+                        <Container centered="true">
                             <div style={{ maxWidth: '70%', marginLeft: '15%', maxHeight: 'auto' }}><Image centered src="/images/certs.png" /></div>
 
                             <Segment>
@@ -132,7 +138,9 @@ const TypingTest = () => (
                         Grab your keyboard and get your typing speed timed!
                         </p>
                         <p style={{ fontSize: '1.33em',textAlign:'center' }}>
-                            <Button>Take A TYPING TEST</Button>
+                            <Link to="/typingtest/test" >
+                            <Button>TAKE A TEST</Button>
+                            </Link>
                         </p>
                     </Grid.Column>
                    

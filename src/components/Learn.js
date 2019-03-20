@@ -19,12 +19,16 @@ import {
   Icon
 } from "semantic-ui-react";
 
-const Learn = () => (
+const Learn = (props) => (
   <div>
     <ResponsiveContainer
       content="hello"
       subContent="start learn fast"
       buttonText="Start typing"
+      // color=''
+      bgURL = '/images/keybackshade.jpg'
+      activelearn={true}
+    loggedin={props.loggedin}
     >
       <Segment vertical>
         <Container className="tableOfScore">

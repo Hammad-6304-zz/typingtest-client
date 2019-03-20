@@ -16,7 +16,9 @@ import {
   Responsive,
   Segment,
   Sidebar,
-  Visibility
+  Label,
+  Visibility,
+  Dropdown
 } from "semantic-ui-react";
 class AppBar extends Component {
   state = {};
@@ -26,7 +28,8 @@ class AppBar extends Component {
 
   render() {
     const { fixed } = this.state;
-
+    const url = this.props.bgURL;
+    const comp = "url(" + url + " ) ";
     return (
       <Visibility
         once={false}
@@ -36,47 +39,80 @@ class AppBar extends Component {
         <Segment
           inverted
           textAlign="center"
-          style={{ minHeight: 700, padding: "1em 0em" }}
+          style={{
+            minHeight: 700,
+            padding: "0em 0em",
+            backgroundImage: comp,
+            backgroundAttachment: "fixed",
+            backgroundOrigin: "borderBox",
+            backgroundRepeat: "noRepeat",
+            backgroundSize: "cover",
+            backgroundPosition: "center center"
+          }}
           vertical
         >
           <Menu
             fixed={fixed ? "top" : null}
-            inverted={!fixed}
+            // inverted={!fixed}
             pointing={!fixed}
             secondary={!fixed}
+            style={{
+              margin: "0px",
+              padding: "0px",
+              backgroundColor: "rgba(175, 174, 174, 0.767)"
+            }}
             size="large"
+            color={this.props.color}
           >
             <Container>
               <Link to="/">
-                <Menu.Item as="a">Home</Menu.Item>
+                <Menu.Item active={this.props.activehome}>Home</Menu.Item>
               </Link>
 
               <Link to="/typingtest">
-                <Menu.Item active as="a">
+                <Menu.Item active={this.props.activetest}>
                   Typing Test
                 </Menu.Item>
               </Link>
               <Link to="/learn">
-                <Menu.Item as="a">Learn</Menu.Item>
+                <Menu.Item active={this.props.activelearn}>Learn</Menu.Item>
               </Link>
 
               <Link to="/HighScore">
-                <Menu.Item as="a">High Scores</Menu.Item>
+                <Menu.Item active={this.props.activescore}>
+                  High Scores
+                </Menu.Item>
               </Link>
+              {this.props.loggedin === true ? (
+                <Menu.Item position="right">
+                  <Image avatar spaced="right" src="/images/girl.png" />
+                  <span style={{fontWeight:'bold'}}>Hammad Ali</span>
+                  <Dropdown>
+                    <Dropdown.Menu>
+                      <Dropdown.Item text="New" />
+                      <Dropdown.Item text="Open..." description="ctrl + o" />
+                      <Dropdown.Item text="Save as..." description="ctrl + s" />
+                      <Dropdown.Item text="Rename" description="ctrl + r" />
+                      <Dropdown.Item text="Make a copy" />
+                      <Dropdown.Divider />
+                      <Dropdown.Item text="Logout" />
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Menu.Item>
+              ) : (
+                <Menu.Item position="right">
+                  <Button inverted={!fixed}>Log in</Button>
+                  <Button
+                    inverted={!fixed}
+                    primary={fixed}
+                    style={{ marginLeft: "0.5em" }}
+                  >
+                    Sign Up
+                  </Button>
+                </Menu.Item>
+              )}
 
-              <Menu.Item position="right">
-                <Button as="a" inverted={!fixed}>
-                  Log in
-                </Button>
-                <Button
-                  as="a"
-                  inverted={!fixed}
-                  primary={fixed}
-                  style={{ marginLeft: "0.5em" }}
-                >
-                  Sign Up
-                </Button>
-              </Menu.Item>
+            
             </Container>
           </Menu>
           <HomepageHeading

@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
-import { Switch, Route} from "react-router-dom"; 
-import HomepageLayout from '../components/home'
-import TypingTest from '../components/typingTest'
-import Score from './scores'
-import Learn from './Learn'
+import React, { Component } from "react";
+import { Switch, Route } from "react-router-dom";
+import HomepageLayout from "../components/home";
+import TypingTest from "../components/typingTest";
+import TestBegain from "./testBegain";
+import TestPrep from "./testprep";
+import Score from "./scores";
+import Learn from "./Learn";
 class Main extends Component {
+  state = { loggedin: true };
   render() {
     return (
       <div className="main">
@@ -12,22 +15,31 @@ class Main extends Component {
         {/* <MenuTop /> */}
         {/* <Background />
         <CenteredPopup /> */}
-        
 
         {/* <HomepageLayout /> */}
         {/* <TypingTest /> */}
         {/* <Score /> */}
         <Switch>
-
-        <Route path="/HighScore" component={Score} />
-        <Route  path="/typingTest" component={TypingTest} />
-        <Route  path="/learn" component={Learn} />
-        <Route exact  path="/" component={HomepageLayout} />
-
+          <Route
+            path="/HighScore"
+            render={() => <Score loggedin={this.state.loggedin} />}
+          />
+          <Route path="/typingtest/test" component={TestBegain} />
+          <Route
+            path="/typingTest"
+            render={() => <TypingTest loggedin={this.state.loggedin} />}
+          />
+          <Route
+            path="/learn"
+            render={() => <Learn loggedin={this.state.loggedin} />}
+          />
+          <Route
+            exact
+            path="/"
+            render={() => <HomepageLayout loggedin={this.state.loggedin} />}
+          />
         </Switch>
-
-
-        
+        {/* <TestPrep /> */}
       </div>
     );
   }

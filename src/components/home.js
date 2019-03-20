@@ -14,11 +14,15 @@ import {
     Icon
 } from 'semantic-ui-react'
 
-const HomepageLayout = () => (
+const HomepageLayout = (props) => (
     <ResponsiveContainer
     content="Home page"
     subContent="homepage sub heading"
     buttonText="start homepage"
+    // color=''
+    bgURL = '/images/handsshade.jpg'
+    activehome={true}
+    loggedin={props.loggedin}
   >
         <Segment style={{ padding: '8em 0em' }} vertical>
             <Grid container stackable verticalAlign='middle'>

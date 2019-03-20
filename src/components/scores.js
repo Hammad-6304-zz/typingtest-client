@@ -17,13 +17,17 @@ import {
     Segment,
     Icon
 } from 'semantic-ui-react'
-
-const Score = () => (
+let color = '#'+55+'ACEE';
+const Score = (props) => (
     <div>
           <ResponsiveContainer
       content="scores"
       subContent="scores sub"
       buttonText="button scores"
+    //   color=''
+      bgURL = '/images/scoresshade.jpg'
+      activescore={true}
+      loggedin={props.loggedin}
     >
         {/* <AppBar /> */}
 

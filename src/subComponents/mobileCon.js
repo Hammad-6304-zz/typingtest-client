@@ -11,7 +11,10 @@ import {
   Responsive,
   Segment,
   Sidebar,
-  Visibility
+  Visibility,
+  Image,
+  Dropdown,
+  DropdownDivider
 } from "semantic-ui-react";
 class MobileContainer extends Component {
   state = {};
@@ -23,7 +26,8 @@ class MobileContainer extends Component {
   render() {
     const { children } = this.props;
     const { sidebarOpened } = this.state;
-
+    const url = this.props.bgURL;
+    const comp = "url("+ url +" ) ";
     return (
       <Responsive
         as={Sidebar.Pushable}
@@ -37,22 +41,23 @@ class MobileContainer extends Component {
           onHide={this.handleSidebarHide}
           vertical
           visible={sidebarOpened}
+          color={this.props.color}
         >
           <Link to="/">
-            <Menu.Item as="a">Home</Menu.Item>
+            <Menu.Item active={this.props.activehome} >Home</Menu.Item>
           </Link>
 
           <Link to="/typingtest">
-            <Menu.Item active as="a">
+            <Menu.Item active={this.props.activetest} >
               Typing Test
             </Menu.Item>
           </Link>
           <Link to="/learn">
-            <Menu.Item as="a">Learn</Menu.Item>
+            <Menu.Item active={this.props.activelearn} >Learn</Menu.Item>
           </Link>
 
           <Link to="/HighScore">
-            <Menu.Item as="a">High Scores</Menu.Item>
+            <Menu.Item active={this.props.activescore} >High Scores</Menu.Item>
           </Link>
         </Sidebar>
 
@@ -60,22 +65,55 @@ class MobileContainer extends Component {
           <Segment
             inverted
             textAlign="center"
-            style={{ minHeight: 350, padding: "1em 0em" }}
-            vertical
+            style={{ minHeight: 350, padding: "1em 0em",backgroundImage: comp,
+            backgroundAttachment: 'fixed',
+            backgroundOrigin: 'borderBox',
+            backgroundRepeat: 'noRepeat',
+            backgroundSize: 'cover',
+            backgroundPosition:'center center' }}
+            
           >
             <Container>
               <Menu inverted pointing secondary size="large">
                 <Menu.Item onClick={this.handleToggle}>
                   <Icon name="sidebar" />
                 </Menu.Item>
+
+
+                {this.props.loggedin === true ? (
                 <Menu.Item position="right">
-                  <Button as="a" inverted>
+                 
+                  <span style={{fontWeight:'bold'}}>Hammad Ali</span>
+                  <Dropdown >
+                    <Dropdown.Menu>
+                      <Dropdown.Item text="New" />
+                      <Dropdown.Item text="Open"/>
+                      <Dropdown.Item text="Save" />
+                      <Dropdown.Item text="Rename" />
+                      <Dropdown.Divider />
+                      <Dropdown.Item text="Logout" />
+                    </Dropdown.Menu>
+                  </Dropdown>
+                  <Image avatar spaced="left" src="/images/girl.png" />
+                </Menu.Item>
+              ) : (
+                <Menu.Item position="right">
+                  <Button  inverted>
                     Log in
                   </Button>
-                  <Button as="a" inverted style={{ marginLeft: "0.5em" }}>
+                  <Button  inverted style={{ marginLeft: "0.5em" }}>
                     Sign Up
                   </Button>
                 </Menu.Item>
+              )}
+                {/* <Menu.Item position="right">
+                  <Button  inverted>
+                    Log in
+                  </Button>
+                  <Button  inverted style={{ marginLeft: "0.5em" }}>
+                    Sign Up
+                  </Button>
+                </Menu.Item> */}
               </Menu>
             </Container>
             <HomepageHeading
@@ -83,6 +121,7 @@ class MobileContainer extends Component {
               content={this.props.content}
               subContent={this.props.subContent}
               buttonText={this.props.buttonText}
+              
             />
           </Segment>
 

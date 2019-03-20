@@ -29,3 +29,46 @@ body{
   padding: 2% !important;
   background: white
 }
+/* /////////////////////////////////////// */
+
+
+/************************************************/
+* {
+  margin: 0;
+  padding: 0; }
+
+
+
+
+/************************************************/
+/* hides small bit of residule text after scrolling */
+.magic-box {
+  position: fixed;
+  width: inherit;
+  height: 0.5em;
+  top: 54px;
+  background-color: #fff; }
+
+.waiting {
+  text-align: center;
+  line-height: 1.5em;
+  font-size: 3em; }
+
+.current-word {
+  background-color: #dddddd; 
+padding: 4px;
+border-radius: 5px}
+
+.correct-word-c {
+  color: #93C572; }
+
+.incorrect-word-c {
+  color: #e50000; }
+
+.incorrect-word-bg {
+  background-color: #e50000; }
+
+.targetdiv > span{
+  display: inline-block;
+  margin: 0.2em;
+}

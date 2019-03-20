@@ -8,13 +8,27 @@ export const ResponsiveContainer = props => (
       content={props.content}
       subContent={props.subContent}
       buttonText={props.buttonText}
-    >
+      color = {props.color}
+      bgURL = {props.bgURL}
+      activehome = {props.activehome}
+      activetest = {props.activetest}
+      activelearn = {props.activelearn}
+      activescore = {props.activescore}
+      loggedin = {props.loggedin}
+      >
       {props.children}
     </DesktopContainer>
     <MobileContainer
+      color = {props.color}
       content={props.content}
       subContent={props.subContent}
       buttonText={props.buttonText}
+      bgURL = {props.bgURL}
+      activehome = {props.activehome}
+      activetest = {props.activetest}
+      activelearn = {props.activelearn}
+      activescore = {props.activescore}
+      loggedin = {props.loggedin}
     >
       {props.children}
     </MobileContainer>
