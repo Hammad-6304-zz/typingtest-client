@@ -18,7 +18,7 @@ import {
   Container,
   Divider,
   Grid,
-  Header,
+  Dropdown,
   Image,
   List,
   Segment,
@@ -30,7 +30,7 @@ import {
 // let wordList = para.split(" ")
 
 let wordData = {
-  seconds: 5,
+  seconds: 60,
   correct: 0,
   incorrect: 0,
   total: 0,
@@ -66,18 +66,30 @@ class TestPrep extends React.Component {
     incorrect: "",
     wpm: "",
     dim: false,
-    disp: ""
+    disp: "",
+    active : true
   };
 
 
   sendServer=(data)=>{
+    let userData ;
+    if(sessionStorage.getItem("status")){
+
+      let data = JSON.parse(sessionStorage.getItem("status"));
+       userData = data.userData;
+      console.log("am from navbar",userData)
+    }
+    else{
+       userData = {firstName:"",lastName:""}
+    }
     console.log("sendserver",this.state)
     var options = {
       method: "POST",
       body: JSON.stringify({
-        dataname: "user",
+        dataname: userData.firstName + " "+userData.lastName,
         wpm: data.wpm,
-        accuracy: data.accuracy    
+        accuracy: data.accuracy,
+        
       }),
       headers: {
         "Content-Type": "application/json"
@@ -179,15 +191,52 @@ class TestPrep extends React.Component {
   //   // magicBox.classList.add("magic-box");
   //   // wordSection.appendChild(magicBox);
   // };
-  componentDidMount() {
-    start(this.target, wordList);
+  active = ()=>{
+    let parseData = JSON.parse(sessionStorage.getItem("status"));
+    let status = parseData.logg;
+    if(status == true){
+
+      this.setState({active:false})
+    }
   }
-  reset = () => {
-    console.log(this.wholeSeg);
-    window.location.reload();
+  componentDidMount() {
+    if(sessionStorage.getItem("status")){
+      
+      this.setState({active:false})
+    }
+
+
+    
+
+
+    start(this.target, wordList);
+
+    var options = {
+      method: "POST",
+      body: "",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    // fetch("http://localhost:8000/authCheck", options)
+    //   .then(res => res.text())
+    //   .then(data => {
+    //     console.log(data);
+    //     if(data.active == true){
+    //       this.active()
+    //     }
+
+    //   })
+    //   .catch(error => console.log(error));
+
+
+
   };
 
   render() {
+    // if(localStorage.getItem("status")){
+    //   this.active()
+    // }
     return (
       <div>
         <Menu
@@ -210,21 +259,48 @@ class TestPrep extends React.Component {
               <Menu.Item>High Scores</Menu.Item>
             </Link>
 
-            <Menu.Item position="right">
-              <Button>Log in</Button>
-              <Button style={{ marginLeft: "0.5em" }}>Sign Up</Button>
-            </Menu.Item>
+            {this.props.loggedin === true ? (
+                <Menu.Item position="right">
+                  <Image avatar spaced="right" src="/images/girl.png" />
+                  <span style={{fontWeight:'bold'}}>Hammad Ali</span>
+                  <Dropdown>
+                    <Dropdown.Menu>
+                      <Dropdown.Item text="New" />
+                      <Dropdown.Item text="Open..." description="ctrl + o" />
+                      <Dropdown.Item text="Save as..." description="ctrl + s" />
+                      <Dropdown.Item text="Rename" description="ctrl + r" />
+                      <Dropdown.Item text="Make a copy" />
+                      <Dropdown.Divider />
+                      <Dropdown.Item onClick={this.logout} text="Logout" />
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Menu.Item>
+              ) : (
+                <Menu.Item position="right">
+                  <Link to="/login"><Button >Log in</Button></Link>
+                 <Link to="/signup">
+                  <Button
+                    
+                    style={{ marginLeft: "0.5em" }}
+                    >
+                    Sign Up
+                  </Button>
+                    </Link>
+                </Menu.Item>
+              )}
           </Container>
         </Menu>
 
-        {this.state.dim === true ? (
+        {this.state.dim === true ? ( 
           <Segment vertical style={{ padding: "5%" }}>
             <DimmerResult server={() =>this.sendServer(this.state)} data={this.state} />
           </Segment>
         ) : null}
 
         <div ref={ref => (this.wholeSeg = ref)}>
+        {this.state.active == true ?<Segment vertical style={{fontSize:"40px",textAlign:'center'}}>Please login for take test</Segment>:null}
           <Segment
+          disabled={this.state.active}
             vertical
             style={{ marginTop: "3%", display: this.state.disp }}
           >
@@ -294,16 +370,21 @@ class TestPrep extends React.Component {
                     }}
                   >
                     <textarea
+                    disabled={this.state.active}
                       ref={ref => (this.textbox = ref)}
                       onKeyUp={e => this.typingTest(e)}
                       style={{
                         resize: "none",
                         minWidth: "80%",
-                        height: "120px"
+                        height: "120px",
+                        
                       }}
                     />
                     <span style={{ padding: "2%" }}>
-                      <Button color="youtube" onClick={this.reset}>
+                      <Button color="youtube" 
+                      disabled={this.state.active}
+                      
+                      onClick={this.reset}>
                         <Icon name="redo" />
                         Restart
                       </Button>

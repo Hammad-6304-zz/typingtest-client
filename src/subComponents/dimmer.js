@@ -19,7 +19,7 @@ export default class DimmerResult extends Component {
       <div>
         <Dimmer.Dimmable
           as={Segment}
-          style={{ minHeight: "400px", zIndex: "1000000" }}
+          style={{ minHeight: "400px" }}
           dimmed={active}
         >
           <Dimmer

@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import HomepageHeading from "./homeHeading";
 import { getWidth } from "./getwidth";
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux';
 import React, { Component } from "react";
 import {
   Button,
@@ -26,9 +27,42 @@ class AppBar extends Component {
   hideFixedMenu = () => this.setState({ fixed: false });
   showFixedMenu = () => this.setState({ fixed: true });
 
+  logout=()=>{
+    var options = {
+      method: "POST",
+      body: "",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    fetch("http://localhost:8000/logout",options)
+      .then(res => res.text())
+      .then(message => {console.log(message)
+        
+      sessionStorage.setItem("log",message)
+      })
+      .catch(error => console.log(error)
+      );
+      sessionStorage.clear();
+      window.location.reload();
+
+
+
+  }
+
   render() {
-    const { fixed } = this.state;
-    const url = this.props.bgURL;
+    let userData ;
+    if(sessionStorage.getItem("status")){
+
+      let data = JSON.parse(sessionStorage.getItem("status"));
+       userData = data.userData;
+      console.log("am from navbar",userData)
+    }
+    else{
+       userData = {firstName:"",lastName:""}
+    }
+      const { fixed } = this.state;
+      const url = this.props.bgURL;
     const comp = "url(" + url + " ) ";
     return (
       <Visibility
@@ -86,29 +120,29 @@ class AppBar extends Component {
               {this.props.loggedin === true ? (
                 <Menu.Item position="right">
                   <Image avatar spaced="right" src="/images/girl.png" />
-                  <span style={{fontWeight:'bold'}}>Hammad Ali</span>
+                  <span style={{fontWeight:'bold'}}>{userData.firstName} {userData.lastName}</span>
                   <Dropdown>
                     <Dropdown.Menu>
                       <Dropdown.Item text="New" />
-                      <Dropdown.Item text="Open..." description="ctrl + o" />
-                      <Dropdown.Item text="Save as..." description="ctrl + s" />
-                      <Dropdown.Item text="Rename" description="ctrl + r" />
-                      <Dropdown.Item text="Make a copy" />
+                      
+                      <Dropdown.Item text="hel" />
                       <Dropdown.Divider />
-                      <Dropdown.Item text="Logout" />
+                      <Dropdown.Item onClick={this.logout} text="Logout" />
                     </Dropdown.Menu>
                   </Dropdown>
                 </Menu.Item>
               ) : (
                 <Menu.Item position="right">
-                  <Button inverted={!fixed}>Log in</Button>
+                  <Link to="/login"><Button inverted={!fixed}>Log in</Button></Link>
+                 <Link to="/signup">
                   <Button
                     inverted={!fixed}
                     primary={fixed}
                     style={{ marginLeft: "0.5em" }}
-                  >
+                    >
                     Sign Up
                   </Button>
+                    </Link>
                 </Menu.Item>
               )}
 
