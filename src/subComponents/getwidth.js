@@ -1,17 +1,5 @@
 import {
-    Button,
-    Container,
-    Divider,
-    Grid,
-    Header,
-    Icon,
-    Image,
-    List,
-    Menu,
-    Responsive,
-    Segment,
-    Sidebar,
-    Visibility,
+    Responsive
   } from 'semantic-ui-react'
 export const getWidth = () => {
     const isSSR = typeof window === 'undefined'

@@ -1,4 +1,4 @@
-import DimmerResult from "../subComponents/dimmer";
+
 export default function calculateWPM(data, targetresult, sub, input, target) {
   let { seconds, correct, incorrect, total, typed } = data;
   let min = seconds / 60;
@@ -22,13 +22,7 @@ export default function calculateWPM(data, targetresult, sub, input, target) {
     disp: "none"
   };
 
-  // targetresult.innerHTML = results;
-  // let hello = "ilove"
   input.value = "";
   sub(data1);
   target.innerHTML = "<h1 >Finished test</h1>";
-
-  // color code accuracy
-
-  // console.log(wordData);
 }

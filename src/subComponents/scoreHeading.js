@@ -1,6 +1,5 @@
 import React from 'react'
-import { Header, Image, Icon } from 'semantic-ui-react'
-
+import { Header,  Icon } from 'semantic-ui-react'
 class ScoreHeading extends React.Component {
     render() {
         return (
@@ -12,9 +11,9 @@ class ScoreHeading extends React.Component {
                     <Header.Subheader>Put your Name on the Top!</Header.Subheader>
                     </Header.Content>
                 </Header>
-                <div style={{margin:'2%'}}>Please log in and get your typing certificate to enter the typing high scores table.</div>
+                <div style={{margin:'2%'}}>Please Take a free <b>TypingTest</b>, and break the records</div>
             </div>
         )
-    }
+    }   
 }
 export default ScoreHeading

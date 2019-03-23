@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {LoginFormErrors} from '../subComponents/loginFormErrors'
+import { LoginFormErrors } from "../subComponents/loginFormErrors";
 import {
   Button,
   Form,
@@ -8,7 +8,8 @@ import {
   Header,
   Image,
   Message,
-  Segment
+  Segment,
+  Icon
 } from "semantic-ui-react";
 
 class LoginForm extends React.Component {
@@ -24,7 +25,6 @@ class LoginForm extends React.Component {
   };
 
   handleSubmit = () => {
-    console.log(this.state.username, "pass", this.state.password);
     var options = {
       method: "POST",
       body: JSON.stringify({
@@ -38,10 +38,9 @@ class LoginForm extends React.Component {
     fetch("http://localhost:8000/login", options)
       .then(res => res.text())
       .then(message => {
-        // console.log(message);
-        if (message == "Unauthorized") {
+        if (message === "Unauthorized") {
           alert("woridn details");
-        } else if (message == "Bad Request") {
+        } else if (message === "Bad Request") {
           alert("filll both form ");
         } else {
           let data1 = JSON.parse(message);
@@ -51,27 +50,19 @@ class LoginForm extends React.Component {
           delete data1.userData.password;
 
           sessionStorage.setItem("status", JSON.stringify(data1));
-          console.log(data1);
-
-          // sessionStorage.setItem("status", message);
+          
           this.reload();
         }
       })
       .catch(error => console.log(error));
-    // window.location.reload();
   };
   reload = () => {
     setTimeout(() => {
-      // this.setState({ nav: true });
+      
       window.location.reload();
     }, 500);
   };
-  // username = (e, data) => {
-  //   this.setState({ username: data.value });
-  // };
-  // password = (e, data) => {
-  //   this.setState({ password: data.value });
-  // };
+  
 
   submitting = (e, data) => {
     const name = data.name;
@@ -79,39 +70,43 @@ class LoginForm extends React.Component {
     this.setState({ [name]: value }, () => {
       this.validateField(name, value);
     });
-    // this.setState({ [name]: value });
-    // console.log(this.state);
-    //    () => {
-    //   this.validateField(name, value);
-    // });
+   
   };
   validateField(fieldName, value) {
     let fieldValidationErrors = this.state.formErrors;
     let usernameValid = this.state.usernameValid;
     let passwordValid = this.state.passwordValid;
-  
-    switch(fieldName) {
-      case 'username':
-      usernameValid = value.trim().length >= 6;
-        fieldValidationErrors.username = usernameValid ? '' : " must should be atleast 6 char lenghty";
+
+    switch (fieldName) {
+      case "username":
+        usernameValid = value.trim().length >= 6;
+        fieldValidationErrors.username = usernameValid
+          ? ""
+          : " must should be atleast 6 char lenghty";
         break;
-      case 'password':
+      case "password":
         passwordValid = value.trim().length >= 6;
-        fieldValidationErrors.password = passwordValid ? '': " is too short ";
+        fieldValidationErrors.password = passwordValid ? "" : " is too short ";
         break;
       default:
         break;
     }
-    this.setState({formErrors: fieldValidationErrors,
-                    usernameValid: usernameValid,
-                    passwordValid: passwordValid
-                  }, this.validateForm);
+    this.setState(
+      {
+        formErrors: fieldValidationErrors,
+        usernameValid: usernameValid,
+        passwordValid: passwordValid
+      },
+      this.validateForm
+    );
   }
-  
+
   validateForm() {
-    this.setState({formValid: this.state.usernameValid && this.state.passwordValid});
+    this.setState({
+      formValid: this.state.usernameValid && this.state.passwordValid
+    });
   }
-  
+
   componentDidMount() {
     if (sessionStorage.getItem("status")) {
       this.setState({ logStatus: true });
@@ -121,17 +116,14 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div>
-        {this.state.logStatus == false ? (
-          <div
-            className="login-form"
-            style={{ height: "100%", marginTop: "15%" }}
-          >
-            {/*
-
-          Heads up! The styles below are necessary for the correct render of this example.
-          You can do same with CSS, the main idea is that all the elements up to the `Grid`
-          below must have a height of 100%.
-        */}
+        <div style={{ padding: "2%" }}>
+          <Link to="/">
+            <Icon name="arrow circle left" size="big" />
+          </Link>
+        </div>
+        {this.state.logStatus === false ? (
+          <div>
+          
 
             <Grid
               textAlign="center"
@@ -148,7 +140,11 @@ class LoginForm extends React.Component {
                     <Form.Input
                       onChange={(e, data) => this.submitting(e, data)}
                       fluid
-                      error = {this.state.username === ""?false:!this.state.usernameValid}
+                      error={
+                        this.state.username === ""
+                          ? false
+                          : !this.state.usernameValid
+                      }
                       value={this.state.username}
                       name="username"
                       icon="user"
@@ -158,7 +154,11 @@ class LoginForm extends React.Component {
                     <Form.Input
                       onChange={(e, data) => this.submitting(e, data)}
                       fluid
-                      error = {this.state.password === ""?false:!this.state.passwordValid}
+                      error={
+                        this.state.password === ""
+                          ? false
+                          : !this.state.passwordValid
+                      }
                       value={this.state.password}
                       name="password"
                       icon="lock"
@@ -205,7 +205,7 @@ class LoginForm extends React.Component {
               your are logged in
             </h1>
             <Link to="/">
-              <Button color="red">Back to home</Button>
+              <Button color="red">Go to Main</Button>
             </Link>
           </div>
         )}

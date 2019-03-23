@@ -1,30 +1,21 @@
 import React from "react";
 import { ResponsiveContainer } from "../subComponents/responsiveCon";
-import ScoreTable from "../subComponents/scoreTable";
-import ScoreTabs from "../subComponents/scoreTabs";
-import { BlogSegment } from "../subComponents/blogSegment";
-import ScoreHeading from "../subComponents/scoreHeading";
-import MenuBar from "../subComponents/menubar";
-import AppBar from "../subComponents/navbar";
 import Footer from "./footer";
 import {
-  Button,
   Container,
   Divider,
   Grid,
   Header,
   Image,
-  List,
   Segment,
-  Icon
 } from "semantic-ui-react";
 
 const Learn = (props) => (
   <div>
     <ResponsiveContainer
-      content="hello"
-      subContent="start learn fast"
-      buttonText="Start typing"
+      content="Lean How To Type"
+      subContent="some tips and tricks from experts for improve your typing"
+      buttonText="hide"
       // color=''
       bgURL = '/images/keybackshade.jpg'
       activelearn={true}

@@ -1,14 +1,9 @@
 import React from "react";
 import {
-  Button,
-  Container,
-  Divider,
   Grid,
   Header,
   Image,
-  List,
-  Segment,
-  Icon
+  Segment
 } from "semantic-ui-react";
 
 export const BlogSegment = () => {
@@ -40,9 +35,7 @@ export const BlogSegment = () => {
               1st-graders) I start off with Keyboard Builder, Cupcake Bugs, and
               Frog Pond Patrol.
             </p>
-            <Button as="a" size="large">
-              Read More <Icon name="right arrow" />
-            </Button>
+            
           </Grid.Column>
           <Grid.Column style={{ paddingBottom: "5em" }}>
             <Header as="h3" style={{ fontSize: "2em" }}>
@@ -55,9 +48,7 @@ export const BlogSegment = () => {
               quickly and accurately might be the only skill that stands between
               you and another equally qualified applicant.
             </p>
-            <Button as="a" size="large">
-              Read More <Icon name="right arrow" />
-            </Button>
+           
           </Grid.Column>
         </Grid.Row>
       </Grid>

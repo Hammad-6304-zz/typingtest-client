@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import { Button, Header, Icon, Modal } from 'semantic-ui-react'
 
 const SignupReveal = (props) => (
-  <Modal trigger={props.button} basic size='small'>
+  <Modal closeOnDimmerClick={false} trigger={props.button} basic size='small'>
     <Header icon='archive' content='Account Created Successfully' />
     <Modal.Content>
       <p>
@@ -13,7 +13,7 @@ const SignupReveal = (props) => (
     <Modal.Actions>
       <Link to="/">
       <Button color='green' inverted>
-        <Icon name='checkmark' /> Back To Home
+        <Icon name='checkmark' /> Go To Main
       </Button>
       </Link>
     </Modal.Actions>

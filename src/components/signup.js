@@ -8,8 +8,8 @@ import {
   Grid,
   Header,
   Image,
-  Message,
-  Segment
+  Segment,
+  Icon
 } from "semantic-ui-react";
 
 class SignupForm extends React.Component {
@@ -40,7 +40,6 @@ class SignupForm extends React.Component {
     let day = date.toLocaleDateString();
     let time = date.toLocaleTimeString();
 
-    console.log(this.state);
     var options = {
       method: "POST",
       body: JSON.stringify({
@@ -59,12 +58,10 @@ class SignupForm extends React.Component {
     fetch("http://localhost:8000/signup", options)
       .then(res => res.text())
       .then(message => {
-        console.log(message);
+        console.log();
       })
-      .catch(error => console.log(error));
-    // window.location.reload();
+      .catch(error => console.log());
     this.clear();
-    console.log("signup successfully");
   };
 
   clear = () => {
@@ -140,7 +137,6 @@ class SignupForm extends React.Component {
     });
   }
   submitting = (e, data) => {
-    console.log(this.state);
     const name = data.name;
     const value = data.value;
     this.setState({ [name]: value }, () => {
@@ -149,12 +145,14 @@ class SignupForm extends React.Component {
   };
   render() {
     return (
-      <div className="login-form" style={{ height: "100%", marginTop: "5%" }}>
-        {/*
-          Heads up! The styles below are necessary for the correct render of this example.
-          You can do same with CSS, the main idea is that all the elements up to the `Grid`
-          below must have a height of 100%.
-        */}
+      <div  >
+      <div style={{padding:'2%'}}>
+        <Link to="/">
+        
+        <Icon name="arrow circle left" size="big" />
+        </Link>
+        </div>
+       
 
         <Grid
           textAlign="center"
