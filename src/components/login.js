@@ -215,3 +215,7 @@ class LoginForm extends React.Component {
 }
 
 export default LoginForm;
+
+
+
+  // "proxy": "https://gamicatypingtest.herokuapp.com"

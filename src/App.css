@@ -1,13 +1,6 @@
 body{
     background: #F3F3F3;
 }
-/* .ui.primary.inverted.segment,.ui.inverted.segment {
-   
-  background: url('/images/hands.jpg') no-repeat center center fixed;
-  background-size: cover;
-  height: 100%;
-  overflow: hidden;
-} */
 .certsSeg{
   /* border: 1px solid black !important; */
   margin:1% 5%  !important;
@@ -29,9 +22,6 @@ body{
   padding: 2% !important;
   background: white
 }
-/* /////////////////////////////////////// */
-
-
 /************************************************/
 * {
   margin: 0;
@@ -41,7 +31,6 @@ body{
 
 
 /************************************************/
-/* hides small bit of residule text after scrolling */
 .magic-box {
   position: fixed;
   width: inherit;

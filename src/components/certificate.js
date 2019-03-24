@@ -121,9 +121,12 @@ class Certificate extends React.Component {
                     <Image avatar size="small" src="/images/avatar.jpg" />
                     <Header>{userData.firstName} {userData.lastName}</Header>
                   </Segment>
+                  <a href="/images/certificate.jpg" download>
+
                   <Button primary style={{ margin: "4% 0" }}>
                     Download Certificate
                   </Button>
+                  </a>
                 </Grid.Column>
               </Grid.Row>
             </Grid>

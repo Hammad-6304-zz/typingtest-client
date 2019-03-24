@@ -22,7 +22,7 @@ import {
 } from "semantic-ui-react";
 
 let wordData = {
-  seconds: 5,
+  seconds: 60,
   correct: 0,
   incorrect: 0,
   total: 0,

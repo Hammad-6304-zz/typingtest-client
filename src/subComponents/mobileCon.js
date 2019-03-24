@@ -121,7 +121,7 @@ class MobileContainer extends Component {
                         <Dropdown.Item onClick={this.logout} text="Logout" />
                       </Dropdown.Menu>
                     </Dropdown>
-                    <Image avatar spaced="left" src="/images/girl.png" />
+                    <Image avatar spaced="left" src="/images/avatar.jpg" />
                   </Menu.Item>
                 ) : (
                   <Menu.Item position="right">
